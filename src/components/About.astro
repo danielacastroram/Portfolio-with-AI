@@ -1,0 +1,83 @@
+---
+import { facts } from '../data/site';
+---
+<section class="about wrap" aria-labelledby="about-title">
+  <h2 id="about-title" class="section-title about__title" data-split>Some facts<br />about me</h2>
+
+  <div class="about__grid">
+    <div class="about__copy">
+      <p class="about__lead" data-read>
+        Hi, I’m Dani — a Senior Product Designer from Costa Rica, currently living in Vienna. For the past 12+ years,
+        I’ve been designing digital products that people actually enjoy using, across healthcare, e-commerce, and ed-tech.
+      </p>
+      <p data-reveal>
+        I love bringing ideas to life, from the first messy sketch to the final polished experience, working closely
+        with cross-functional teams to create products that are intuitive, impactful, and genuinely useful.
+      </p>
+      <p data-reveal>I care just as much about solving the right problem as I do about crafting beautiful interfaces.</p>
+      <p data-reveal>
+        Outside of work, I’m usually illustrating, convincing my friends to try a new restaurant, or dancing like
+        nobody’s watching (because that’s definitely more fun).
+      </p>
+    </div>
+
+    <div class="facts" data-facts>
+      <p class="facts__hint eyebrow" aria-hidden="true">Drag me around ↘</p>
+      {facts.map((f, i) => (
+        <div class={`fact fact--${i}`} style={`--bg:${f.color}`} data-fact data-cursor-label="Drag">
+          <div class="fact__art" aria-hidden="true">
+            {f.art === 'cat' && (
+              <svg viewBox="0 0 80 64"><path d="M14 58V22L6 4l18 10h32l18-10-8 18v36Z" fill="#1b1464"/><circle cx="29" cy="34" r="4" fill="#fff"/><circle cx="51" cy="34" r="4" fill="#fff"/><path d="M36 44l4 3 4-3" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+            )}
+            {f.art === 'cr' && (
+              <svg viewBox="0 0 90 60"><rect width="90" height="60" rx="6" fill="#002B7F"/><rect y="10" width="90" height="40" fill="#fff"/><rect y="20" width="90" height="20" fill="#CE1126"/></svg>
+            )}
+            {f.art === 'pasta' && (
+              <svg viewBox="0 0 90 60"><path d="M45 30C35 12 18 4 8 8c4 10 4 34 0 44 10 4 27-4 37-22Z" fill="#F4B860"/><path d="M45 30c10-18 27-26 37-22-4 10-4 34 0 44-10 4-27-4-37-22Z" fill="#F4B860"/><path d="M20 16c4 8 4 20 0 28M70 16c-4 8-4 20 0 28" stroke="#c9862c" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="40" y="22" width="10" height="16" rx="5" fill="#e09a3a"/></svg>
+            )}
+            {f.art === 'hack' && (
+              <div class="hack"><span style="color:var(--orange)">H</span><span style="color:var(--lilac)">A</span><span>C</span><span style="color:var(--green)">K</span></div>
+            )}
+          </div>
+          <p class="fact__text">{f.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { padding-block: clamp(80px, 12vh, 140px); }
+  .about__title { margin-bottom: clamp(40px, 6vw, 80px); }
+  .about__grid { display: grid; gap: 64px; }
+  @media (min-width: 960px) { .about__grid { grid-template-columns: 1.05fr 1fr; gap: 72px; } }
+
+  .about__copy p { margin: 0 0 1.2em; font-size: 20px; line-height: 1.5; max-width: 52ch; color: #222; }
+  .about__copy .about__lead { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.22; letter-spacing: -0.015em; color: var(--ink); max-width: 30ch; }
+
+  .facts { position: relative; min-height: 560px; }
+  .facts__hint { position: absolute; right: 0; top: -28px; margin: 0; color: var(--muted); }
+  .fact {
+    position: absolute; width: min(250px, 62%); padding: 22px 22px 18px;
+    background: var(--bg); border-radius: 24px;
+    box-shadow: 0 1px 0 rgb(0 0 0 / .04), 0 10px 30px -12px rgb(0 0 0 / .18);
+    touch-action: none; user-select: none; will-change: transform;
+  }
+  .fact.is-dragging { box-shadow: 0 30px 60px -20px rgb(0 0 0 / .35); }
+  .fact--0 { left: 2%; top: 0; rotate: -6deg; }
+  .fact--1 { right: 2%; top: 60px; rotate: 5deg; }
+  .fact--2 { left: 0; top: 250px; rotate: 3deg; }
+  .fact--3 { right: 2%; top: 350px; rotate: -4deg; border: 1px dashed #cfcfcf; }
+  .fact__art { height: 92px; display: grid; place-items: center; margin-bottom: 12px; pointer-events: none; }
+  .fact__art svg { height: 100%; width: auto; }
+  .fact__text { margin: 0; font-size: 19px; font-weight: 500; text-align: center; line-height: 1.25; pointer-events: none; }
+  .hack { display: grid; grid-template-columns: 1fr 1fr; font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1; }
+  .hack span { width: 44px; height: 44px; display: grid; place-items: center; border: 1px dotted #888; margin: -.5px; }
+
+  /* Touch / small screens: a neat swipeable row instead of a sticker pile */
+  @media (max-width: 959px), (pointer: coarse) {
+    .facts { min-height: 0; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 12px 4px 24px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+    .facts__hint { display: none; }
+    .fact { position: relative; inset: auto; flex: 0 0 72%; max-width: 280px; scroll-snap-align: start; rotate: 0deg; touch-action: auto; }
+  }
+</style>

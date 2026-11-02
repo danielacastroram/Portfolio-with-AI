@@ -1,0 +1,57 @@
+---
+import { experience } from '../data/site';
+---
+<section class="exp wrap" aria-labelledby="exp-title">
+  <div class="exp__head">
+    <h2 id="exp-title" class="section-title" data-split>Experience</h2>
+    <p class="exp__intro" data-reveal>12+ years across healthcare, e-commerce and ed-tech — from first hire to design lead.</p>
+  </div>
+  <ol class="exp__list" role="list" data-exp>
+    {experience.map((job) => (
+      <li class="exp__row">
+        <span class="exp__line" aria-hidden="true"></span>
+        <span class="exp__company">
+          {job.company}
+          {job.current && <span class="exp__now"><i></i>Now</span>}
+        </span>
+        <span class="exp__role">{job.role}{job.note && <em> · {job.note}</em>}</span>
+        <span class="exp__period">{job.period}</span>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .exp { padding-block: clamp(80px, 12vh, 140px); }
+  .exp__head { display: grid; gap: 20px; margin-bottom: clamp(32px, 5vw, 64px); }
+  @media (min-width: 860px) { .exp__head { grid-template-columns: 1fr 1fr; align-items: end; } }
+  .exp__intro { margin: 0; max-width: 38ch; font-size: 20px; color: #333; justify-self: end; }
+
+  .exp__list { list-style: none; margin: 0; padding: 0; }
+  .exp__row {
+    position: relative; isolation: isolate;
+    display: grid; gap: 4px 24px; padding: 22px 0;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) {
+    .exp__row { grid-template-columns: 1.1fr 1.3fr 1fr; align-items: baseline; padding: 28px 0; }
+    .exp__period { text-align: right; }
+  }
+  .exp__line { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--ink); transform-origin: 0 50%; opacity: .14; }
+  .exp__row::before {
+    content: ''; position: absolute; inset: 0 calc(var(--gutter) * -0.5); z-index: -1;
+    background: var(--soft); border-radius: 16px;
+    transform: scaleY(0); transform-origin: 50% 100%;
+    transition: transform .5s var(--ease-out);
+  }
+  .exp__row:hover::before { transform: scaleY(1); }
+  .exp__company { font-family: var(--display); font-weight: 600; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 12px; transition: transform .5s var(--ease-out); }
+  .exp__row:hover .exp__company { transform: translateX(10px); }
+  .exp__role { font-size: 19px; font-weight: 500; }
+  .exp__role em { font-style: normal; color: var(--muted); }
+  .exp__period { color: var(--muted); font-size: 17px; font-variant-numeric: tabular-nums; }
+
+  .exp__now { display: inline-flex; align-items: center; gap: 6px; font-family: var(--body); font-weight: 600; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #1b6b43; background: #e3f7ec; padding: 4px 10px 4px 8px; border-radius: 999px; }
+  .exp__now i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgb(73 204 139 / .6); animation: ping 2s infinite; }
+  @keyframes ping { 70% { box-shadow: 0 0 0 8px rgb(73 204 139 / 0); } 100% { box-shadow: 0 0 0 0 rgb(73 204 139 / 0); } }
+</style>

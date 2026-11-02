@@ -1,0 +1,94 @@
+@import '@fontsource/bricolage-grotesque/600.css';
+@import '@fontsource/bricolage-grotesque/800.css';
+@import '@fontsource/archivo-narrow/400.css';
+@import '@fontsource/archivo-narrow/500.css';
+@import '@fontsource/archivo-narrow/600.css';
+@import '@fontsource/lisu-bosa/300.css';
+@import '@fontsource/lisu-bosa/300-italic.css';
+
+:root {
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --muted: #a7a7a7;
+  --soft: #f8f8f8;
+  --line: #e7e7e7;
+  --orange: #ff6816;
+  --green: #49cc8b;
+  --lilac: #d5ccf7;
+
+  --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --body: 'Archivo Narrow', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'Lisu Bosa', Georgia, serif;
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1280px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius: clamp(16px, 2vw, 28px);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+::selection { background: var(--orange); color: #fff; }
+
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; border-radius: 6px; }
+
+.skip {
+  position: fixed; left: 16px; top: -60px; z-index: 200;
+  background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px;
+  transition: top .3s var(--ease-out);
+}
+.skip:focus { top: 16px; }
+
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+.eyebrow {
+  font-family: var(--body); font-weight: 500; font-size: 12px;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(40px, 7vw, 96px); line-height: .92; letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* Split-word reveal helpers (motion.ts wraps words) */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.wi { display: inline-block; will-change: transform; }
+
+/* Hide-before-animate, only when JS + motion are on */
+.motion [data-reveal] { opacity: 0; }
+.motion .line-inner { transform: translateY(110%); }
+
+/* Custom cursor hides the native one on fine pointers */
+.has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+.motion [data-hero-fade],
+.motion [data-hero-star],
+.motion [data-hero-burst] { opacity: 0; }

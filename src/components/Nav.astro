@@ -1,0 +1,39 @@
+---
+import { site, url } from '../data/site';
+---
+<header class="nav" transition:persist="nav" data-nav>
+  <nav aria-label="Primary">
+    <a href={url('/')} class="pill pill--home" data-magnetic data-cursor-hide>Home</a>
+    <a href={site.linkedin} class="pill pill--in" target="_blank" rel="noopener" data-magnetic data-cursor-hide>LinkedIn</a>
+    <a href={url(site.cv)} class="pill pill--cv" target="_blank" rel="noopener" data-magnetic data-cursor-hide>CV</a>
+  </nav>
+</header>
+
+<style>
+  .nav {
+    position: fixed; top: 16px; left: 50%; z-index: 100;
+    transform: translateX(-50%);
+    transition: transform .6s var(--ease-out);
+  }
+  .nav.is-hidden { transform: translate(-50%, -140%); }
+  nav { display: flex; align-items: center; }
+  .pill {
+    display: grid; place-items: center;
+    width: 64px; height: 56px;
+    font-family: var(--body); font-weight: 500; font-size: 12px;
+    transition: border-radius .5s var(--ease-out), transform .5s var(--ease-out), background-color .3s;
+    will-change: transform;
+  }
+  .pill--home { background: var(--green); color: #18351f; border-radius: 22px 22px 22px 22px / 26px 26px 26px 26px; margin-right: -2px; }
+  .pill--in { background: var(--orange); color: #3b1500; border-radius: 4px; }
+  .pill--cv { background: var(--ink); color: #fff; border-radius: 50%; width: 56px; margin-left: -2px; }
+
+  .pill--home:hover { border-radius: 50%; }
+  .pill--in:hover { border-radius: 50%; }
+  .pill--cv:hover { border-radius: 14px; background: var(--orange); color: #3b1500; }
+
+  @media (min-width: 768px) {
+    .pill { width: 76px; height: 64px; font-size: 13px; }
+    .pill--cv { width: 64px; }
+  }
+</style>
