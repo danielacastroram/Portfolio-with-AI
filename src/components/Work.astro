@@ -3,37 +3,22 @@ import { getCollection } from 'astro:content';
 import { url } from '../data/site';
 const projects = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
-<section id="work" class="work wrap" aria-labelledby="work-title">
-  <div class="work__head">
-    <h2 id="work-title" class="section-title" data-split>Selected work</h2>
-    <p class="eyebrow work__count" data-reveal>({String(projects.length).padStart(2, '0')}) projects</p>
-  </div>
-
+<section id="work" class="work frame" aria-label="Selected work">
   <ul class="work__grid" role="list">
     {projects.map((p, i) => (
-      <li class={`card card--${i % 4}`}>
-        <a
-          href={url(`work/${p.id}/`)}
-          class="card__link"
-          data-cursor-label="View case"
-          style={`--cursor-bg:${p.data.accent};--cursor-ink:${p.data.accentInk};--accent:${p.data.accent}`}
-        >
-          <div class="card__media" data-clip>
+      <li class="card" data-reveal>
+        <a href={url(`work/${p.id}/`)} class="card__link">
+          <div class="card__media">
             <img
               src={url(p.data.cover)}
               alt={p.data.coverAlt}
               loading={i < 2 ? 'eager' : 'lazy'}
-              data-parallax
               transition:name={`cover-${p.id}`}
             />
           </div>
-          <div class="card__meta" data-reveal>
-            <span class="card__num">{String(i + 1).padStart(2, '0')}</span>
-            <span class="eyebrow card__tag">{p.data.tagline}</span>
-            <span class="card__title" transition:name={`title-${p.id}`}>
-              {p.data.title}
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
+          <div class="card__meta">
+            <span class="card__tag">{p.data.tagline}</span>
+            <span class="card__title" transition:name={`title-${p.id}`}>{p.data.title}</span>
           </div>
         </a>
       </li>
@@ -42,41 +27,30 @@ const projects = (await getCollection('work')).sort((a, b) => a.data.order - b.d
 </section>
 
 <style>
-  .work { padding-block: clamp(80px, 14vh, 160px); }
-  .work__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: clamp(40px, 7vw, 96px); }
-  .work__count { margin: 0; color: #555; }
-
-  .work__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(56px, 8vw, 120px) clamp(20px, 3vw, 40px); }
-  @media (min-width: 860px) {
-    .work__grid { grid-template-columns: repeat(12, 1fr); }
-    .card--0 { grid-column: 1 / span 7; }
-    .card--1 { grid-column: 9 / span 4; margin-top: 30%; }
-    .card--2 { grid-column: 2 / span 5; }
-    .card--3 { grid-column: 7 / span 6; margin-top: 20%; }
-  }
+  .work__grid { list-style: none; margin: 0; padding: 0; display: grid; }
 
   .card__link { display: block; }
-  .card__media {
-    position: relative; overflow: hidden; border-radius: var(--radius);
-    aspect-ratio: 4 / 3.2; background: var(--soft);
-  }
-  .card--1 .card__media, .card--2 .card__media { aspect-ratio: 4 / 5; }
-  .card__media img {
-    position: absolute; inset: -8% 0; width: 100%; height: 116%;
-    object-fit: cover; transition: scale 1s var(--ease-out);
-  }
-  .card__link:hover .card__media img { scale: 1.05; }
+  .card__media { height: 302px; background: var(--soft); overflow: hidden; }
+  .card__media img { width: 100%; height: 100%; object-fit: cover; }
 
   .card__meta {
-    display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 16px;
-    padding-top: 18px; border-top: 1px solid transparent;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    height: 66px; padding: 0 18px 0 16px;
   }
-  .card__num { font-family: var(--body); font-size: 13px; color: var(--muted); }
-  .card__tag { color: #444; }
-  .card__title {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--serif); font-weight: 300; font-size: clamp(22px, 2.2vw, 30px); line-height: 1;
+  .card__tag { font-weight: 500; font-size: 10px; line-height: 12px; letter-spacing: .6px; text-transform: uppercase; }
+  .card__title { font-family: var(--serif); font-weight: 200; font-size: 18px; line-height: 1; letter-spacing: -0.004em; text-align: right; }
+
+  /* Two columns; the right column sits 40px lower */
+  @media (min-width: 800px) {
+    .work { padding-bottom: 40px; }
+    .work__grid { grid-template-columns: 1fr 1fr; }
+    .card:nth-child(even) { position: relative; top: 40px; }
+    .card__media { height: 311px; }
+    .card__meta { height: 81px; padding: 0 20px; }
   }
-  .card__title svg { width: .8em; height: .8em; transition: transform .5s var(--ease-out); }
-  .card__link:hover .card__title svg { transform: translate(4px, -4px) rotate(0deg); color: var(--accent); }
+  @media (min-width: 1280px) {
+    .card__media { height: 528px; }
+    .card__meta { height: 100px; }
+    .card__title { font-size: 20px; }
+  }
 </style>

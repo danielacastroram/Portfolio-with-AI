@@ -1,77 +1,39 @@
 ---
-import { site } from '../data/site';
-const phrase = 'Want to say hello?';
+import { site, url } from '../data/site';
 ---
-<section class="contact" aria-labelledby="contact-title">
-  <div class="marquee" aria-hidden="true" data-marquee>
-    <div class="marquee__track">
-      {Array.from({ length: 6 }).map(() => (
-        <span>{phrase}<svg viewBox="0 0 40 40"><path d="M20 0c1.6 10.4 9.6 18.4 20 20-10.4 1.6-18.4 9.6-20 20C18.4 29.6 10.4 21.6 0 20 10.4 18.4 18.4 10.4 20 0Z" fill="var(--orange)"/></svg></span>
-      ))}
-    </div>
-  </div>
+<footer class="contact frame" aria-labelledby="contact-title">
+  <h2 id="contact-title" class="sr-only">Contact</h2>
+  <ul class="socials" role="list">
+    <li><a href={site.dribbble} target="_blank" rel="noopener"><img src={url('images/dribbble.svg')} alt="Dribbble" width="30" height="30" /></a></li>
+    <li><a href={site.linkedin} target="_blank" rel="noopener"><img src={url('images/linkedin.svg')} alt="LinkedIn" width="30" height="30" /></a></li>
+  </ul>
+  <p class="hello">Want to say hello? <a href={`mailto:${site.email}`}>{site.email}</a></p>
 
-  <div class="wrap contact__body">
-    <h2 id="contact-title" class="sr-only">{phrase}</h2>
-    <button class="email" type="button" data-copy={site.email} data-magnetic data-magnetic-strength="0.25" data-cursor-label="Copy">
-      <span class="email__text">{site.email}</span>
-      <span class="email__toast" role="status" aria-live="polite"></span>
-    </button>
-    <p class="contact__or">or <a href={`mailto:${site.email}`} class="ul">open your mail app</a></p>
-
-    <ul class="socials" role="list">
-      <li><a href={site.linkedin} target="_blank" rel="noopener" class="ul" data-magnetic>LinkedIn</a></li>
-      <li><a href={site.dribbble} target="_blank" rel="noopener" class="ul" data-magnetic>Dribbble</a></li>
-    </ul>
-  </div>
-
-  <footer class="shapes" aria-hidden="true" data-shapes>
+  <div class="shapes" aria-hidden="true" data-shapes>
     <span class="shape shape--a"></span>
     <span class="shape shape--b"></span>
     <span class="shape shape--c"></span>
-  </footer>
-  <p class="wrap colophon">© {new Date().getFullYear()} Daniela Castro · Designed by me, built with Astro & GSAP</p>
-</section>
+  </div>
+</footer>
 
 <style>
-  .contact { padding-top: clamp(80px, 12vh, 140px); overflow: hidden; }
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .contact { height: 280px; overflow: hidden; }
+  .socials { list-style: none; margin: 0; padding: 80px 0 0; display: flex; justify-content: center; gap: 67px; }
+  .socials img { width: 30px; height: 30px; }
+  .hello { margin-top: 20px; text-align: center; font-weight: 500; font-size: 16px; line-height: 20.8px; }
+  .hello a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-  .marquee { overflow: hidden; padding-block: 8px; }
-  .marquee__track { display: flex; width: max-content; will-change: transform; }
-  .marquee span {
-    display: inline-flex; align-items: center; gap: .3em; padding-right: .3em;
-    font-family: var(--display); font-weight: 800; font-size: clamp(64px, 12vw, 200px);
-    letter-spacing: -0.04em; line-height: 1; white-space: nowrap;
-  }
-  .marquee svg { width: .45em; height: .45em; }
+  .shapes { position: absolute; left: 0; right: 0; top: 219px; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .shape { display: block; aspect-ratio: 1; }
+  .shape--a { background: var(--green); border-radius: 40px; }
+  .shape--b { background: var(--orange); }
+  .shape--c { background: var(--lilac); border-radius: 999px; }
 
-  .contact__body { display: grid; justify-items: center; text-align: center; gap: 18px; padding-block: clamp(40px, 6vw, 72px) clamp(64px, 10vw, 120px); }
-  .email {
-    position: relative; padding: 22px 34px; border-radius: 999px; background: var(--ink); color: #fff;
-    font-family: var(--body); font-weight: 600; font-size: clamp(18px, 2.4vw, 28px);
-    transition: background-color .3s;
+  @media (min-width: 800px) {
+    .contact { height: 340px; }
+    .socials { padding-top: 64px; }
+    .hello { margin-top: 32px; }
+    .shapes { top: 271px; }
+    .shape--a { border-radius: 100px; }
   }
-  .email:hover { background: var(--orange); }
-  .email__toast {
-    position: absolute; left: 50%; top: -14px; translate: -50% -100%;
-    background: var(--green); color: #0f2d1c; font-size: 14px; padding: 6px 12px; border-radius: 999px;
-    opacity: 0; transition: opacity .3s, translate .5s var(--ease-out); pointer-events: none; white-space: nowrap;
-  }
-  .email.is-copied .email__toast { opacity: 1; translate: -50% -110%; }
-  .contact__or { margin: 0; color: #555; }
-  .ul { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size .5s var(--ease-out); padding-bottom: 2px; }
-  .ul:hover { background-size: 0 1px; background-position: 100% 100%; }
-  .socials { list-style: none; padding: 0; margin: 12px 0 0; display: flex; gap: 28px; font-size: 20px; font-weight: 500; }
-  .socials a { display: inline-block; }
-
-  .shapes { display: flex; justify-content: center; align-items: flex-end; height: clamp(120px, 20vw, 260px); gap: 0; }
-  .shape { display: block; width: clamp(110px, 18vw, 240px); height: 100%; transition: border-radius .8s var(--ease-out); transform-origin: 50% 100%; }
-  .shape--a { background: var(--green); border-radius: 48% 48% 0 0 / 40% 40% 0 0; }
-  .shape--b { background: var(--orange); border-radius: 0; }
-  .shape--c { background: var(--lilac); border-radius: 50% 50% 0 0; }
-  .shapes:hover .shape--a { border-radius: 0; }
-  .shapes:hover .shape--b { border-radius: 50% 50% 0 0; }
-  .shapes:hover .shape--c { border-radius: 24% 24% 0 0; }
-  .colophon { text-align: center; color: var(--muted); font-size: 14px; padding-block: 20px 28px; margin: 0; }
 </style>

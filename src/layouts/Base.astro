@@ -2,7 +2,6 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
-import Cursor from '../components/Cursor.astro';
 import { site, url } from '../data/site';
 
 interface Props { title?: string; description?: string; image?: string }
@@ -31,9 +30,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <a class="skip" href="#main">Skip to main content</a>
-    <div class="progress" aria-hidden="true" transition:persist="progress"><span></span></div>
     <Nav />
-    <Cursor />
     <main id="main">
       <slot />
     </main>
@@ -44,9 +41,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 </html>
 
 <style is:global>
-  .progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 120; pointer-events: none; }
-  .progress span { display: block; height: 100%; background: var(--orange); transform-origin: 0 50%; transform: scaleX(0); }
-
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .55s; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
   ::view-transition-group(*) { animation-duration: .7s; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
 </style>

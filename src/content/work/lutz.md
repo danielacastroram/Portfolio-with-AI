@@ -2,7 +2,7 @@
 title: "Lutz"
 tagline: "Favourites feature"
 order: 2
-cover: "images/lutz-cover.svg"
+cover: "images/lutz-cover.png"
 coverAlt: "Lutz project cover"
 accent: "#E2412B"
 accentInk: "#ffffff"
@@ -27,7 +27,7 @@ What you owned, who you worked with, and the decisions you drove.
 
 Describe research, explorations and the key turning points. Add images like this:
 
-![Describe the image](images/lutz-cover.svg)
+![Describe the image](images/lutz-cover.png)
 
 ## Outcome
 

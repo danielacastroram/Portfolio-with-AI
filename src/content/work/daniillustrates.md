@@ -2,7 +2,7 @@
 title: "Daniillustrates"
 tagline: "Illustration work"
 order: 4
-cover: "images/daniillustrates-cover.svg"
+cover: "images/daniillustrates-cover.png"
 coverAlt: "Daniillustrates project cover"
 accent: "#D5CCF7"
 accentInk: "#1b1464"
@@ -27,7 +27,7 @@ What you owned, who you worked with, and the decisions you drove.
 
 Describe research, explorations and the key turning points. Add images like this:
 
-![Describe the image](images/daniillustrates-cover.svg)
+![Describe the image](images/daniillustrates-cover.png)
 
 ## Outcome
 

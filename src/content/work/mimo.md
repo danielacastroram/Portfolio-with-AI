@@ -2,7 +2,7 @@
 title: "Mimo"
 tagline: "Designing for growth"
 order: 3
-cover: "images/mimo-cover.svg"
+cover: "images/mimo-cover.png"
 coverAlt: "Mimo project cover"
 accent: "#2A1B6B"
 accentInk: "#ffffff"
@@ -27,7 +27,7 @@ What you owned, who you worked with, and the decisions you drove.
 
 Describe research, explorations and the key turning points. Add images like this:
 
-![Describe the image](images/mimo-cover.svg)
+![Describe the image](images/mimo-cover.png)
 
 ## Outcome
 

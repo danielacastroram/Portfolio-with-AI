@@ -1,36 +1,39 @@
-@import '@fontsource/bricolage-grotesque/600.css';
-@import '@fontsource/bricolage-grotesque/800.css';
+@import '@fontsource-variable/bricolage-grotesque/standard.css';
 @import '@fontsource/archivo-narrow/400.css';
 @import '@fontsource/archivo-narrow/500.css';
 @import '@fontsource/archivo-narrow/600.css';
-@import '@fontsource/lisu-bosa/300.css';
-@import '@fontsource/lisu-bosa/300-italic.css';
+@import '@fontsource/lisu-bosa/200.css';
+@import '@fontsource/lisu-bosa/200-italic.css';
 
 :root {
-  --ink: #0a0a0a;
+  --ink: #000000;
   --paper: #ffffff;
   --muted: #a7a7a7;
   --soft: #f8f8f8;
-  --line: #e7e7e7;
+  --line: #cacaca;
+  --card-line: #ededed;
   --orange: #ff6816;
   --green: #49cc8b;
   --lilac: #d5ccf7;
 
-  --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
   --body: 'Archivo Narrow', ui-sans-serif, system-ui, sans-serif;
   --serif: 'Lisu Bosa', Georgia, serif;
 
-  --gutter: clamp(16px, 4vw, 56px);
-  --max: 1280px;
+  /* The design is three fixed-width frames: 375 (mobile), 800 (from 800px), 1280 (from 1280px) */
+  --frame: min(375px, 100%);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --radius: clamp(16px, 2vw, 28px);
 }
+@media (min-width: 800px) { :root { --frame: 800px; } }
+@media (min-width: 1280px) { :root { --frame: 1280px; } }
 
 *,
 *::before,
 *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+/* Bricolage at its 96pt optical size, width 88 — the condensed cut used in the design.
+   Archivo Narrow and Lisu Bosa have no such axes, so this only affects display type. */
+html { -webkit-text-size-adjust: 100%; font-variation-settings: 'opsz' 96, 'wdth' 88; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -41,7 +44,7 @@ body {
   color: var(--ink);
   font-family: var(--body);
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.2;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
@@ -50,45 +53,34 @@ body {
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+p { margin: 0; }
 ::selection { background: var(--orange); color: #fff; }
 
 :focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; border-radius: 6px; }
 
 .skip {
   position: fixed; left: 16px; top: -60px; z-index: 200;
-  background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px;
+  background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 12px;
   transition: top .3s var(--ease-out);
 }
 .skip:focus { top: 16px; }
 
-.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.frame { position: relative; width: var(--frame); margin-inline: auto; }
 
-.eyebrow {
-  font-family: var(--body); font-weight: 500; font-size: 12px;
-  letter-spacing: .12em; text-transform: uppercase;
-}
+/* Case-study pages (not in the design file) reuse the frame with the hero's side inset */
+:root { --gutter: 16px; --radius: 16px; }
+@media (min-width: 800px) { :root { --gutter: 40px; } }
+@media (min-width: 1280px) { :root { --gutter: 80px; } }
+.wrap { width: var(--frame); margin-inline: auto; padding-inline: var(--gutter); }
+.eyebrow { font-family: var(--body); font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
 
-.section-title {
-  font-family: var(--display); font-weight: 800;
-  font-size: clamp(40px, 7vw, 96px); line-height: .92; letter-spacing: -0.03em;
-  margin: 0;
-}
-
-/* Split-word reveal helpers (motion.ts wraps words) */
-.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
-.wi { display: inline-block; will-change: transform; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Hide-before-animate, only when JS + motion are on */
 .motion [data-reveal] { opacity: 0; }
 .motion .line-inner { transform: translateY(110%); }
-
-/* Custom cursor hides the native one on fine pointers */
-.has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+.motion [data-hero-fade] { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
-
-.motion [data-hero-fade],
-.motion [data-hero-star],
-.motion [data-hero-burst] { opacity: 0; }

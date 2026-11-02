@@ -20,12 +20,9 @@ npm run dev      # http://localhost:4321
 | Colors, fonts | `src/styles/global.css` (`:root`) |
 | All interactions | `src/scripts/motion.ts` |
 
-### Swapping in your images
+### Images
 
-1. Drop files into `public/images/` (e.g. `gostudent-cover.png`).
-2. Update `cover:` in the matching `src/content/work/*.md`.
-3. Replace `public/images/avatar.svg` with your photo (e.g. `avatar.jpg`) and update the path in `src/components/Hero.astro`.
-4. Add a 1200×630 `public/og.png` for link previews.
+All images in `public/images/` come from the published design at danielacastrodesign.com. To change a cover, drop the new file in and update `cover:` in the matching `src/content/work/*.md`. Add a 1200×630 `public/og.png` for link previews.
 
 ### Writing a case study
 
@@ -39,17 +36,7 @@ To add a project, copy one of the files and give it a new `order`.
 
 ## Interactions
 
-- Smooth scrolling (Lenis) and a scroll-progress bar
-- Hero: masked line-by-line headline reveal, pointer-reactive star and burst
-- Custom cursor that becomes a colored "View case" label on projects
-- Magnetic nav, buttons and links
-- Project images open from a rounded window, with parallax inside the frame
-- Section titles rise word by word; intro paragraph lights up as you read
-- Experience rules draw in; rows highlight on hover
-- Fact cards are draggable stickers with inertia (desktop) or a swipe row (touch)
-- Velocity-reactive "Want to say hello?" marquee; click-to-copy email
-- Page transitions: the project image morphs into the case-study hero (View Transitions)
-- Everything respects `prefers-reduced-motion`
+The layout and type match the Figma design exactly (three fixed-width frames: 375 / 800 / 1280px). Motion is kept to smooth scrolling (Lenis), the headline's line-by-line reveal, a 40px fade-up as sections enter, the sticky Experience title, and image morphs between the home page and case studies. Everything respects `prefers-reduced-motion`.
 
 ## Deploying
 

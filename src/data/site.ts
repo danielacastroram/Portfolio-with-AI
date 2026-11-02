@@ -11,8 +11,8 @@ export const site = {
 };
 
 export const experience = [
-  { company: 'Mimo', role: 'Senior Product Designer', period: 'April 2026 — Current', current: true },
-  { company: 'Sirius', role: 'Senior Product Designer', period: 'April 2025 — March 2026', note: '1-year contract' },
+  { company: 'Mimo', role: 'Senior Product Designer', period: 'April 2026 — Current' },
+  { company: 'Sirius', role: 'Senior Product Designer', period: 'April 2025 — March 2026 (1 year contract)' },
   { company: 'GoStudent', role: 'Product Design Lead', period: 'May 2022 — March 2025' },
   { company: 'Lutz Digital', role: 'Senior Product Designer', period: 'April 2021 — April 2022' },
   { company: 'Freelance', role: 'Product Designer', period: 'January 2019 — March 2021' },
@@ -21,10 +21,10 @@ export const experience = [
 ];
 
 export const facts = [
-  { text: 'I’m a cat lady', art: 'cat', color: '#D5CCF7' },
-  { text: 'I’m from Costa Rica', art: 'cr', color: '#49CC8B' },
-  { text: 'Pasta is my favorite food', art: 'pasta', color: '#FFE0B8' },
-  { text: 'I fell in love with UX in a hackathon', art: 'hack', color: '#F8F8F8' },
+  { text: 'I’m a cat lady', art: 'images/fact-cat.svg' },
+  { text: 'I’m from Costa Rica', art: 'images/fact-costa-rica.svg' },
+  { text: 'Pasta is my favorite food', art: 'images/fact-pasta.svg' },
+  { text: 'I fell in love with UX in a hackathon', art: 'images/fact-hack.svg' },
 ] as const;
 
 export const url = (path = '') => {

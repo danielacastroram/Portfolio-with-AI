@@ -22,7 +22,7 @@ const meta = [
 <Base title={`${d.title} — Daniela Castro`} description={d.summary ?? d.tagline}>
   <article class="case" style={`--accent:${d.accent};--accent-ink:${d.accentInk}`}>
     <header class="case__head wrap">
-      <a href={url('/#work')} class="case__back eyebrow" data-magnetic>
+      <a href={url('/#work')} class="case__back eyebrow">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         All work
       </a>
@@ -36,7 +36,7 @@ const meta = [
 
     <div class="case__cover wrap">
       <div class="case__cover-inner">
-        <img src={url(d.cover)} alt={d.coverAlt} transition:name={`cover-${entry.id}`} data-parallax="soft" />
+        <img src={url(d.cover)} alt={d.coverAlt} transition:name={`cover-${entry.id}`} />
       </div>
     </div>
 
@@ -44,7 +44,7 @@ const meta = [
       <Content />
     </div>
 
-    <a href={url(`work/${next.id}/`)} class="next wrap" data-cursor-label="Next" style={`--cursor-bg:${next.data.accent};--cursor-ink:${next.data.accentInk}`}>
+    <a href={url(`work/${next.id}/`)} class="next wrap" style={`--next-accent:${next.data.accent}`}>
       <span class="eyebrow">Next project</span>
       <span class="next__title">{next.data.title}</span>
       <span class="next__tag">{next.data.tagline}</span>
@@ -61,7 +61,7 @@ const meta = [
   .case__back:hover svg { transform: translateX(-4px); }
   .case__tag { margin: 0 0 12px; color: #555; }
   .case__title {
-    margin: 0; font-family: var(--serif); font-weight: 300;
+    margin: 0; font-family: var(--serif); font-weight: 200;
     font-size: clamp(64px, 13vw, 200px); line-height: .9; letter-spacing: -0.03em;
     width: fit-content;
   }
@@ -82,7 +82,7 @@ const meta = [
   .prose :global(li::marker) { color: var(--accent); }
   .prose :global(blockquote) {
     margin: 2em 0; padding: 0; border: 0;
-    font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(30px, 4vw, 48px); line-height: 1.15; color: var(--ink);
+    font-family: var(--serif); font-style: italic; font-weight: 200; font-size: clamp(30px, 4vw, 48px); line-height: 1.15; color: var(--ink);
   }
   .prose :global(blockquote p) { font-size: inherit; line-height: inherit; color: inherit; margin: 0; }
   .prose :global(img) { width: 100%; border-radius: var(--radius); margin: 1.5em 0; background: var(--soft); }
@@ -93,8 +93,8 @@ const meta = [
     padding-block: clamp(64px, 10vw, 120px); border-top: 1px solid var(--line);
   }
   .next .eyebrow { color: #555; }
-  .next__title { font-family: var(--serif); font-weight: 300; font-size: clamp(56px, 11vw, 160px); line-height: .95; letter-spacing: -0.03em; transition: color .4s; }
-  .next:hover .next__title { color: var(--cursor-bg); }
+  .next__title { font-family: var(--serif); font-weight: 200; font-size: clamp(56px, 11vw, 160px); line-height: .95; letter-spacing: -0.03em; transition: color .4s; }
+  .next:hover .next__title { color: var(--next-accent); }
   .next__tag { color: #555; font-size: 18px; }
   .next__preview {
     position: absolute; right: var(--gutter); top: 50%; width: clamp(180px, 24vw, 340px); aspect-ratio: 4/3;

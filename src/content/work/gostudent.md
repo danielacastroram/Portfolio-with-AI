@@ -2,7 +2,7 @@
 title: "GoStudent"
 tagline: "Digital transformation in education"
 order: 1
-cover: "images/gostudent-cover.svg"
+cover: "images/gostudent-cover.png"
 coverAlt: "GoStudent project cover"
 accent: "#2B3FD6"
 accentInk: "#ffffff"
@@ -27,7 +27,7 @@ What you owned, who you worked with, and the decisions you drove.
 
 Describe research, explorations and the key turning points. Add images like this:
 
-![Describe the image](images/gostudent-cover.svg)
+![Describe the image](images/gostudent-cover.png)
 
 ## Outcome
 
